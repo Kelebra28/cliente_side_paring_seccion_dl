@@ -7,7 +7,12 @@ export const testService = () => {
    return axios.get(`${BASE_URL}/`);
 };
 
-
+export const createCommentService = (data: any) => {
+    return axios.post(`${BASE_URL}/api/comments/`, {
+          email: data.email,
+          content: data.content,
+    });
+};
 
 
 
