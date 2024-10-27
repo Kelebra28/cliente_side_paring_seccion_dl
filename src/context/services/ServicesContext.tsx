@@ -1,24 +1,23 @@
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
-
-const BASE_URL = 'http://localhost:3001';
+import { getAllComments } from '../../services';
 
 const ServiceContext = createContext<any>(null);
 
 export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [data, setData] = useState<any>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`${BASE_URL}/api/comments`);
-                const data = response.data;
-                setData(data);
-            } catch (error) {
-                console.error('Error response', error);
-            }
-        };
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await getAllComments();
+            const data = response.data;
+            setData(data);
+        } catch (error) {
+            console.error('Error response', error);
+        }
+    }, []);
 
+    useEffect(() => {
         const responseInterceptor = axios.interceptors.response.use(
             response => response,
             error => {
@@ -32,9 +31,9 @@ export const ServiceProvider: React.FC<{ children: React.ReactNode }> = ({ child
         return () => {
             axios.interceptors.response.eject(responseInterceptor);
         };
-    }, []);
+    }, [fetchData]);
 
-    const contextValue = useMemo(() => ({ data }), [data]);
+    const contextValue = useMemo(() => ({ data, fetchData }), [data, fetchData]);
 
     return (
         <ServiceContext.Provider value={contextValue}>

@@ -1,17 +1,16 @@
-// src/components/MyComponent.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { useServiceContext } from '../context/services/ServicesContext';
 import Card from './comments/Card';
 import AddComment from './inputs/AddComment';
-import { createCommentService } from '../services';
-
+import { createCommentService, deleteCommentService, editCommentService } from '../services';
 
 const LayoutContext = () => {
-  const { data } = useServiceContext();
-  const [formValues, setFormValues] = React.useState({
+  const { data, fetchData } = useServiceContext();
+  const [formValues, setFormValues] = useState({
     email: '',
     content: '',
   });
+  const [editValues, setEditValues] = useState('');
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,15 +20,38 @@ const LayoutContext = () => {
     }));
   };
 
+  const handleOnEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setEditValues(value);
+  };
+
   const handleOnSubmit = async () => {
-    console.log('---> data', formValues);
     try {
       await createCommentService(formValues);
+      await fetchData(); 
     } catch (error) {
       console.log(error);
     }
   };
-  console.log('data', data);
+
+  const handleOnDelete = async (id: number) => {
+    try {
+      await deleteCommentService(id);
+      await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOnEditSubmit = async (id: number) => {
+   try {
+      await editCommentService(id, { content: editValues });
+      await fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -37,8 +59,16 @@ const LayoutContext = () => {
   return (
     <div>
       <h1>Data from Service</h1>
-        <AddComment onChange={(e : any) => handleOnChange(e)} onSubmit={() => handleOnSubmit()}/>
-        <Card data={data} />
+      <AddComment 
+            onChange={handleOnChange} 
+            onSubmit={handleOnSubmit} 
+        />
+      <Card 
+        data={data} 
+        onDelete={handleOnDelete} 
+        onEditSubmit={handleOnEditSubmit} 
+        onEditChange={handleOnEditChange}
+    />
     </div>
   );
 };

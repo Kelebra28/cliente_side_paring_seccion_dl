@@ -7,38 +7,23 @@ export const testService = () => {
    return axios.get(`${BASE_URL}/`);
 };
 
-export const createCommentService = (data: any) => {
+export const getAllComments = () => {
+    return axios.get(`${BASE_URL}/api/comments`);
+};
+
+export const createCommentService = (data: {email: string, content: string}) => {
     return axios.post(`${BASE_URL}/api/comments/`, {
           email: data.email,
           content: data.content,
     });
 };
 
+export const deleteCommentService = (id: number) => {
+    return axios.delete(`${BASE_URL}/api/comments/${id}`);
+};
 
-
-
-
-
-
-
-
-
-
-
-// export const testPostService = (data: any) => {
-//    return axios.post(`${BASE_URL}/api/createUser/`, {
-//         name: data.name,
-//         age: data.age,
-//         nacionality: data.nacionality,
-//         position: data.position,
-//         experience: data.experience,
-//    });
-// }
-
-// export const testGetService = (id: number) => {
-//     return axios.get(`${BASE_URL}/api/getUser/${id}`);
-// };
-
-// export const testGetAllService = () => {
-//     return axios.get(`${BASE_URL}/api/getAllUser/`);
-// }
+export const editCommentService = (id: number, data: { content: string }) => {
+    return axios.put(`${BASE_URL}/api/comments/${id}`, {
+        content: data.content,
+    });
+};
