@@ -27,3 +27,10 @@ export const editCommentService = (id: number, data: { content: string }) => {
         content: data.content,
     });
 };
+
+export const  createNestedCommentService = (id: number, data: {content: string }) => {
+    return axios.post(`${BASE_URL}/api/nested-comments`, {
+        content: data.content,
+        comment_id: id,
+    });
+}

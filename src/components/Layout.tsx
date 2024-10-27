@@ -6,6 +6,7 @@ import {
   createCommentService,
   deleteCommentService,
   editCommentService,
+  createNestedCommentService,
 } from "../services";
 
 const LayoutContext = () => {
@@ -60,6 +61,14 @@ const LayoutContext = () => {
     }
   };
 
+  const handleAddCommentToComment = (id: number) => {
+    try {
+      createNestedCommentService(1, { content: editValues });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (!data) {
     return <div>Loading...</div>;
   }
@@ -75,6 +84,7 @@ const LayoutContext = () => {
         onDelete={handleOnDelete}
         onEditSubmit={handleOnEditSubmit}
         onEditChange={handleOnEditChange}
+        onAddComment={handleAddCommentToComment}
       />
     </div>
   );

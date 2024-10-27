@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Density Labs's Forum
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción
 
-## Available Scripts
+Density Labs's Forum es una aplicación web construida con React y TypeScript que permite a los usuarios agregar, editar y eliminar comentarios en un foro. La aplicación utiliza Tailwind CSS para el diseño y estilo de los componentes.
 
-In the project directory, you can run:
+## Características
 
-### `npm start`
+- Agregar comentarios
+- Editar comentarios
+- Eliminar comentarios
+- Interfaz de usuario estilizada con Tailwind CSS
+- Gestión de estado global con Context API
+- Interceptores de Axios para manejar solicitudes HTTP
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tecnologías Utilizadas
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- TypeScript
+- Tailwind CSS
+- npm
+- Axios
 
-### `npm test`
+## Instalación
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clona el repositorio:
+    ```bash
+    git clone https://github.com/tu-usuario/density-labs-forum.git
+    ```
+2. Navega al directorio del proyecto:
+    ```bash
+    cd density-labs-forum
+    ```
+3. Instala las dependencias:
+    ```bash
+    npm install
+    ```
 
-### `npm run build`
+## Uso
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Inicia la aplicación:
+    ```bash
+    npm start
+    ```
+2. Abre tu navegador y navega a `http://localhost:3000` para ver la aplicación en funcionamiento.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Estructura del Proyecto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- `src/`
+  - `components/`: Contiene los componentes reutilizables de la aplicación.
+    - `Layout.tsx`: Componente principal que maneja la estructura del foro.
+    - `AddComment.tsx`: Componente para agregar nuevos comentarios.
+    - `Card.tsx`: Componente que muestra los comentarios y permite editarlos o eliminarlos.
+    - `AcctionButton.tsx`: Botón reutilizable para diferentes acciones.
+    - `EditsComments.tsx`: Componente para editar comentarios existentes.
+  - `context/`: Contiene los archivos relacionados con Context API para la gestión del estado global.
+    - `CommentContext.tsx`: Proveedor de contexto para manejar el estado de los comentarios.
+  - `services/`: Contiene los archivos relacionados con Axios.
+    - `ServivesContext.tsx`: Configuración de Axios y definición de interceptores.
+  - `App.tsx`: Punto de entrada principal de la aplicación.
+  - `index.tsx`: Archivo de entrada que renderiza la aplicación en el DOM.
 
-### `npm run eject`
+## Uso de Context API
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+La aplicación utiliza Context API para gestionar el estado global de los comentarios. El archivo `CommentContext.tsx` define un contexto y un proveedor que envuelve la aplicación, permitiendo que los componentes accedan y actualicen el estado de los comentarios de manera eficiente.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Interceptores de Axios
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+La aplicación utiliza interceptores de Axios para manejar solicitudes HTTP. El archivo `axiosConfig.ts` configura Axios y define interceptores para agregar encabezados de autenticación y manejar errores de manera centralizada.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contribución
 
-## Learn More
+Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva característica'`).
+4. Haz push a la rama (`git push origin feature/nueva-caracteristica`).
+5. Abre un Pull Request.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.

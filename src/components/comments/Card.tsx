@@ -15,6 +15,7 @@ interface CardProps {
     data: Comment[];
     onDelete: (id: number) => void;
     onEditSubmit: (id: number) => void;
+    onAddComment: (id: number) => void;
     onEditChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
