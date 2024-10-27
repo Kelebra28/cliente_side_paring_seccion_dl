@@ -19,18 +19,24 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ data, onDelete, onEditChange, onEditSubmit }) => {
+
+    if (!data || data.length === 0) {
+        return <h3 className="text-center text-gray-500">No comments</h3>;
+    }
+
     return (
-        <div>
+        <div className="p-4 bg-white rounded-lg shadow-md mt-10">
             {data.map((item, index) => {
                 return (
-                    <ShowComments 
-                        key={index} 
-                        email={item.User.username} 
-                        comment={item.content} 
-                        onDelete={() => onDelete(item.id)}
-                        onEditSubmit={() => onEditSubmit(item.id)}
-                        onEditChange={onEditChange}
-                    />
+                    <div key={index} className="mb-4">
+                        <ShowComments 
+                            email={item.User.username} 
+                            comment={item.content} 
+                            onDelete={() => onDelete(item.id)}
+                            onEditSubmit={() => onEditSubmit(item.id)}
+                            onEditChange={onEditChange}
+                        />
+                    </div>
                 );
             })}
         </div>
