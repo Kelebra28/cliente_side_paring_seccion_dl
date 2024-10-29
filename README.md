@@ -21,6 +21,10 @@ Density Labs's Forum es una aplicación web construida con React y TypeScript qu
 - npm
 - Axios
 
+## Ejemplo de Uso
+
+![Descripción del GIF](./assets/example.gif)
+
 ## Instalación
 
 1. Clona el repositorio:
