@@ -1,12 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import LayoutContext from './components/Layout';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ServiceProvider,
+  useServiceContext,
+} from "./context/services/ServicesContext";
+import { LoaderModal, NoDataPage, LayoutContext } from "./components";
 
-function App() {
-  return(
-    <div className='min-h-screen bg-gradient-to-t from-gray-600 via-gray-700 to-gray-800 flex justify-center items-center flex-col'>
-      <LayoutContext />
-    </div> 
-   )
+const App: React.FC = () => {
+  return (
+    <Router>
+      <ServiceProvider>
+        <AppContent />
+      </ServiceProvider>
+    </Router>
+  );
 };
+
+const AppContent: React.FC = () => {
+  const { loading } = useServiceContext();
+
+  return (
+    <>
+      {loading && <LoaderModal />}
+      <Routes>
+        <Route path="/" element={<LayoutContext />} />
+        <Route path="/no-data" element={<NoDataPage />} />
+      </Routes>
+    </>
+  );
+};
+
 export default App;

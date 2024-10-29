@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface AcctionButtonProps {
   acction: string;
@@ -7,7 +7,12 @@ interface AcctionButtonProps {
   className?: string;
 }
 
-const AcctionButton: React.FC<AcctionButtonProps> = ({ acction, onClick, colorClass = 'bg-blue-600 hover:bg-blue-700', className }) => {
+export const AcctionButton: React.FC<AcctionButtonProps> = ({
+  acction,
+  onClick,
+  colorClass = "bg-blue-600 hover:bg-blue-700",
+  className,
+}) => {
   return (
     <button
       onClick={onClick}
@@ -17,5 +22,3 @@ const AcctionButton: React.FC<AcctionButtonProps> = ({ acction, onClick, colorCl
     </button>
   );
 };
-
-export default AcctionButton;

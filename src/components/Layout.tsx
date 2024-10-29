@@ -1,7 +1,6 @@
-import React, { useState } from "react";
-import { useServiceContext } from "../context/services/ServicesContext";
-import Card from "./comments/Card";
-import AddComment from "./inputs/AddComment";
+import React, { useState, useMemo } from "react";
+import { useServiceContext } from "../context";
+import { LoaderModal, AddComment, Card } from "../components";
 import {
   createCommentService,
   deleteCommentService,
@@ -9,15 +8,17 @@ import {
   createNestedCommentService,
 } from "../services";
 
-const LayoutContext = () => {
-  const { data, fetchData } = useServiceContext();
+export const LayoutContext: React.FC = () => {
+  const { data, fetchData, loading } = useServiceContext();
   const [formValues, setFormValues] = useState({
     email: "",
     content: "",
   });
   const [editValues, setEditValues] = useState("");
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormValues((prevValues) => ({
       ...prevValues,
@@ -25,7 +26,9 @@ const LayoutContext = () => {
     }));
   };
 
-  const handleOnEditChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnEditChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { value } = e.target;
     setEditValues(value);
   };
@@ -56,21 +59,26 @@ const LayoutContext = () => {
     try {
       await editCommentService(id, { content: editValues });
       await fetchData();
+      setEditValues("");
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleAddCommentToComment = (id: number) => {
+  const handleAddCommentToComment = async (id: number) => {
     try {
-      createNestedCommentService(1, { content: editValues });
+      await createNestedCommentService(id, { content: editValues });
+      await fetchData();
+      setEditValues("");
     } catch (error) {
       console.log(error);
     }
   };
 
-  if (!data) {
-    return <div>Loading...</div>;
+  const memoizedData = useMemo(() => data, [data]);
+
+  if (!memoizedData) {
+    return <LoaderModal />;
   }
 
   return (
@@ -78,9 +86,13 @@ const LayoutContext = () => {
       <h1 className="text-5xl font-bold text-white drop-shadow-lg">
         Density Labs's Forum
       </h1>
-      <AddComment onChange={handleOnChange} onSubmit={handleOnSubmit} />
+      <AddComment
+        formValues={formValues}
+        onChange={handleOnChange}
+        onSubmit={handleOnSubmit}
+      />
       <Card
-        data={data}
+        data={memoizedData}
         onDelete={handleOnDelete}
         onEditSubmit={handleOnEditSubmit}
         onEditChange={handleOnEditChange}
@@ -89,5 +101,3 @@ const LayoutContext = () => {
     </div>
   );
 };
-
-export default LayoutContext;

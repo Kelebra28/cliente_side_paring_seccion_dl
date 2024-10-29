@@ -1,19 +1,17 @@
-import axios from 'axios';
+const axios = require("axios");
 
-export const AxiosInterceptor = () => {
+export const setupAxiosInterceptors = () => {
+  const responseInterceptor = axios.interceptors.response.use(
+    (response: any) => response,
+    (error: any) => {
+      console.error("Error response", error);
+      return Promise.reject(error);
+    }
+  );
 
-    axios.interceptors.request.use((request) => {
-        return request;
-    });
+  return responseInterceptor;
+};
 
-    axios.interceptors.response.use(
-        (response) => {
-          const jsonResponse = JSON.stringify(response.data);
-          console.log(jsonResponse);
-          return response;
-        },
-        (error) => {
-          console.log(error.message);
-          return Promise.reject(error);
-        }
-      )};
+export const ejectAxiosInterceptor = (interceptor: number) => {
+  axios.interceptors.response.eject(interceptor);
+};

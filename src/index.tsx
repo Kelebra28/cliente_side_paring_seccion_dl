@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { ServiceProvider } from './context/services/ServicesContext';
-import App from './App';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./App.css";
 
-ReactDOM.render(
-    <ServiceProvider>
-        <App />
-    </ServiceProvider>,
-    document.getElementById('root')
+const container = document.getElementById("root");
+const root = createRoot(container!);
+
+root.render(
+  <div className="min-h-screen bg-gradient-to-t from-gray-600 via-gray-700 to-gray-800 flex justify-center items-center flex-col">
+    <App />
+  </div>
 );
-
