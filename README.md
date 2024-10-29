@@ -69,17 +69,3 @@ La aplicación utiliza Context API para gestionar el estado global de los coment
 ## Interceptores de Axios
 
 La aplicación utiliza interceptores de Axios para manejar solicitudes HTTP. El archivo `axiosConfig.ts` configura Axios y define interceptores para agregar encabezados de autenticación y manejar errores de manera centralizada.
-
-## Contribución
-
-Si deseas contribuir a este proyecto, por favor sigue los siguientes pasos:
-
-1. Haz un fork del repositorio.
-2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
-3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva característica'`).
-4. Haz push a la rama (`git push origin feature/nueva-caracteristica`).
-5. Abre un Pull Request.
-
-## Licencia
-
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
