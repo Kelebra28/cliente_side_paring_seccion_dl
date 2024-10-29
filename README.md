@@ -55,12 +55,10 @@ Density Labs's Forum es una aplicación web construida con React y TypeScript qu
     - `Layout.tsx`: Componente principal que maneja la estructura del foro.
     - `AddComment.tsx`: Componente para agregar nuevos comentarios.
     - `Card.tsx`: Componente que muestra los comentarios y permite editarlos o eliminarlos.
-    - `AcctionButton.tsx`: Botón reutilizable para diferentes acciones.
-    - `EditsComments.tsx`: Componente para editar comentarios existentes.
-  - `context/`: Contiene los archivos relacionados con Context API para la gestión del estado global.
-    - `CommentContext.tsx`: Proveedor de contexto para manejar el estado de los comentarios.
+    - `ActionButton.tsx`: Botón reutilizable para diferentes acciones.
+    - `EditComment.tsx`: Componente para editar comentarios existentes.
   - `services/`: Contiene los archivos relacionados con Axios.
-    - `ServivesContext.tsx`: Configuración de Axios y definición de interceptores.
+    - `ServicesContext.tsx`: Configuración de Axios y definición de interceptores.
   - `App.tsx`: Punto de entrada principal de la aplicación.
   - `index.tsx`: Archivo de entrada que renderiza la aplicación en el DOM.
 
