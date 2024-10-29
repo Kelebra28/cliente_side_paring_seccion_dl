@@ -1,9 +1,9 @@
-const axios = require("axios");
+import axios from "axios";
 
 export const setupAxiosInterceptors = () => {
   const responseInterceptor = axios.interceptors.response.use(
-    (response: any) => response,
-    (error: any) => {
+    (response) => response,
+    (error) => {
       console.error("Error response", error);
       return Promise.reject(error);
     }
